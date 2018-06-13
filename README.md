@@ -1,0 +1,2 @@
+# MGPanController
+Pan Gesture controller
