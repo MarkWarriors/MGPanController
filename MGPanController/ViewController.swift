@@ -8,17 +8,23 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class ViewController: UIViewController, MGPanControllerDelegate {
+    
+    @IBOutlet weak var panController: MGPanController!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        self.panController.delegate = self
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func didPerformSwipeAction(direction: MGPanController.Direction) {
+        print("Swipe action \(direction.rawValue)")
     }
+    
+    func isPanningIn(direction: MGPanController.Direction) {
+        print("Panning in \(direction.rawValue)")
+    }
+    
 
 
 }

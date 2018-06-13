@@ -12,6 +12,10 @@
 		90E6CDC420D14E010053A48E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90E6CDC220D14E010053A48E /* Main.storyboard */; };
 		90E6CDC620D14E020053A48E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90E6CDC520D14E020053A48E /* Assets.xcassets */; };
 		90E6CDC920D14E020053A48E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90E6CDC720D14E020053A48E /* LaunchScreen.storyboard */; };
+		90E6CDD320D14EB50053A48E /* MGPanController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E6CDD120D14EB50053A48E /* MGPanController.swift */; };
+		90E6CDD420D14EB50053A48E /* MGPanController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90E6CDD220D14EB50053A48E /* MGPanController.xib */; };
+		90E6CDE120D15A6A0053A48E /* left_arrow_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 90E6CDD720D15A6A0053A48E /* left_arrow_white.png */; };
+		90E6CDE520D15A6A0053A48E /* right_arrow_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 90E6CDDB20D15A6A0053A48E /* right_arrow_white.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +26,10 @@
 		90E6CDC520D14E020053A48E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		90E6CDC820D14E020053A48E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		90E6CDCA20D14E020053A48E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		90E6CDD120D14EB50053A48E /* MGPanController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MGPanController.swift; sourceTree = "<group>"; };
+		90E6CDD220D14EB50053A48E /* MGPanController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MGPanController.xib; sourceTree = "<group>"; };
+		90E6CDD720D15A6A0053A48E /* left_arrow_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = left_arrow_white.png; sourceTree = "<group>"; };
+		90E6CDDB20D15A6A0053A48E /* right_arrow_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = right_arrow_white.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +62,7 @@
 		90E6CDBD20D14E010053A48E /* MGPanController */ = {
 			isa = PBXGroup;
 			children = (
+				90E6CDD020D14EB50053A48E /* MGPanController */,
 				90E6CDBE20D14E010053A48E /* AppDelegate.swift */,
 				90E6CDC020D14E010053A48E /* ViewController.swift */,
 				90E6CDC220D14E010053A48E /* Main.storyboard */,
@@ -62,6 +71,26 @@
 				90E6CDCA20D14E020053A48E /* Info.plist */,
 			);
 			path = MGPanController;
+			sourceTree = "<group>";
+		};
+		90E6CDD020D14EB50053A48E /* MGPanController */ = {
+			isa = PBXGroup;
+			children = (
+				90E6CDD520D15A6A0053A48E /* Images */,
+				90E6CDD120D14EB50053A48E /* MGPanController.swift */,
+				90E6CDD220D14EB50053A48E /* MGPanController.xib */,
+			);
+			path = MGPanController;
+			sourceTree = "<group>";
+		};
+		90E6CDD520D15A6A0053A48E /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				90E6CDD720D15A6A0053A48E /* left_arrow_white.png */,
+				90E6CDDB20D15A6A0053A48E /* right_arrow_white.png */,
+			);
+			name = Images;
+			path = ../../../MGAmznLikeController/MGAmznLikeController/Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,6 +154,9 @@
 				90E6CDC920D14E020053A48E /* LaunchScreen.storyboard in Resources */,
 				90E6CDC620D14E020053A48E /* Assets.xcassets in Resources */,
 				90E6CDC420D14E010053A48E /* Main.storyboard in Resources */,
+				90E6CDE120D15A6A0053A48E /* left_arrow_white.png in Resources */,
+				90E6CDE520D15A6A0053A48E /* right_arrow_white.png in Resources */,
+				90E6CDD420D14EB50053A48E /* MGPanController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,6 +167,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				90E6CDD320D14EB50053A48E /* MGPanController.swift in Sources */,
 				90E6CDC120D14E010053A48E /* ViewController.swift in Sources */,
 				90E6CDBF20D14E010053A48E /* AppDelegate.swift in Sources */,
 			);
@@ -283,6 +316,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 29R6UT4TC7;
 				INFOPLIST_FILE = MGPanController/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -301,6 +335,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 29R6UT4TC7;
 				INFOPLIST_FILE = MGPanController/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
