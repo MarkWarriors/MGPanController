@@ -15,7 +15,7 @@ import UIKit
     @objc optional func didTapOnSubControllerAt(index: Int, sender: UIButton?)
     @objc optional func didTapOnTabBarAt(index: Int, sender: UIButton?)
     @objc optional func didPerformSwipeAction(direction: MGPanController.Direction)
-    @objc optional func isPanningIn(direction: MGPanController.Direction)
+    @objc optional func isPanningIn(direction: MGPanController.Direction, strenght: CGFloat)
     @objc optional func didOpenSubController()
     @objc optional func didCloseSubController()
     @objc optional func willOpenSubController()
@@ -79,17 +79,20 @@ import UIKit
     private var panGesture : UIPanGestureRecognizer?
     private var maxHorizontalMovement : CGFloat = 0
     private var maxVerticalMovement : CGFloat = 0
-    private let horizontalTriggerPoint : CGFloat = 50
-    private let verticalTriggerPoint : CGFloat = 50
-    
     private var closedSubcontrollerHeight : CGFloat = 0
     private var openedSubcontrollerHeight : CGFloat = 80
+    
+    private let horizontalTriggerPoint : CGFloat = 50
+    private let verticalTriggerPoint : CGFloat = 50
+    private let controllerCentralTollerance : CGFloat = 24.0
     
     public private(set) var controllerImageForStatus : [ControllerStatus:UIImage] = [:]
     public private(set) var canVibrate : Bool = true
     public private(set) var vibrationType : UIImpactFeedbackStyle = .light
     
     public var delegate: MGPanControllerDelegate?
+    
+    
 
     // MARK: LAYOUT INITIALIZATION
     override init(frame: CGRect) {
@@ -101,6 +104,7 @@ import UIKit
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
+        Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(emit(timer:)), userInfo: nil, repeats: true)
     }
     
     func commonInit() {
@@ -152,8 +156,8 @@ import UIKit
     
     open override func layoutSubviews() {
         super.layoutSubviews()
-        self.maxHorizontalMovement = self.controllerView.frame.origin.x
-        self.maxVerticalMovement = self.controllerView.frame.origin.y
+        self.maxHorizontalMovement = self.controllerView.frame.origin.x - controllerCentralTollerance
+        self.maxVerticalMovement = self.controllerView.frame.origin.y - controllerCentralTollerance
     }
 
     
@@ -263,6 +267,29 @@ import UIKit
         let yMove = recognizer.translation(in: self).y
         let xMove = recognizer.translation(in: self).x
         if recognizer.state == UIGestureRecognizerState.changed {
+            if abs(yMove) <= controllerCentralTollerance
+                || abs(xMove) <= controllerCentralTollerance {
+                self.controllerHoriCenterCnstr.constant = 0
+                self.controllerVertCenterCnstr.constant = 0
+                self.controllerMovement = .noMovement
+                
+                if abs(yMove) <= controllerCentralTollerance
+                    && abs(xMove) <= controllerCentralTollerance {
+//                    if abs(yMove) < abs(xMove) {
+//                        self.controllerHoriCenterCnstr.constant = xMove
+//                        self.controllerVertCenterCnstr.constant = 0
+//                    }
+//                    else {
+//                        self.controllerHoriCenterCnstr.constant = 0
+//                        self.controllerVertCenterCnstr.constant = yMove
+//                    }
+                    self.actionDirection = .noDirection
+                    self.isPanningIn(direction: .noDirection, strength: 0.0)
+                    return
+                }
+            }
+            
+            
             if self.controllerMovement == .noMovement {
                 if abs(yMove) > abs(xMove) {
                     self.controllerMovement = .vertical
@@ -270,82 +297,66 @@ import UIKit
                 else if abs(yMove) < abs(xMove) {
                     self.controllerMovement = .horizontal
                 }
-                else {
-                    return
-                }
             }
-//            if abs(yMove) <= 16
-//            && abs(xMove) <= 16 {
-//                self.controllerHoriCenterCnstr.constant = 0
-//                self.controllerVertCenterCnstr.constant = 0
-//                self.controllerMovement = .noMovement
-//            }
-//            else{
-//                self.vibrate()
-//            }
-            
-            
-            if self.subcontrollerHeightCnstr.constant > 0 && self.controllerMovement == .horizontal {
-                self.controllerMovement = .noMovement
-                return
-            }
-            
+
             switch self.controllerMovement{
             case .horizontal:
                 self.controllerVertCenterCnstr.constant = 0
                 self.controllerHoriCenterCnstr.constant = (-maxHorizontalMovement ... maxHorizontalMovement).clamp(xMove)
                 if xMove > 0 {
-                    if self.actionDirection != .rightDirection && xMove > horizontalTriggerPoint {
+                    if self.actionDirection != .rightDirection && xMove > controllerCentralTollerance {
                         self.actionDirection = .rightDirection
                         self.vibrate()
                     }
-                    else if self.actionDirection == .rightDirection && xMove < horizontalTriggerPoint{
+                    else if self.actionDirection == .rightDirection && xMove < controllerCentralTollerance{
                         self.actionDirection = .noDirection
                     }
-                    self.isPanningIn(direction: .rightDirection)
+                    self.isPanningIn(direction: .rightDirection, strength: abs(xMove) / maxHorizontalMovement)
                 }
                 else {
-                    if self.actionDirection != .leftDirection && xMove < -horizontalTriggerPoint {
+                    if self.actionDirection != .leftDirection && xMove < -controllerCentralTollerance {
                         self.actionDirection = .leftDirection
                         self.vibrate()
                     }
-                    else if self.actionDirection == .leftDirection && xMove > -horizontalTriggerPoint {
+                    else if self.actionDirection == .leftDirection && xMove > -controllerCentralTollerance {
                         self.actionDirection = .noDirection
                     }
-                    self.isPanningIn(direction: .leftDirection)
+                    self.isPanningIn(direction: .leftDirection, strength: abs(xMove) / maxHorizontalMovement)
                 }
                 break
-                
+
             case .vertical:
                 self.controllerHoriCenterCnstr.constant = 0
                 self.controllerVertCenterCnstr.constant = (-maxVerticalMovement ... maxVerticalMovement).clamp(yMove)
                 if yMove > 0 {
-                    if self.actionDirection != .topDirection && abs(yMove) > verticalTriggerPoint {
+                    if self.actionDirection != .topDirection && abs(yMove) > controllerCentralTollerance {
                         self.actionDirection = .topDirection
                         self.vibrate()
                     }
-                    else if self.actionDirection == .topDirection && abs(yMove) < verticalTriggerPoint {
+                    else if self.actionDirection == .topDirection && abs(yMove) < controllerCentralTollerance {
                         self.actionDirection = .noDirection
                     }
-                    self.isPanningIn(direction: .topDirection)
+                    self.isPanningIn(direction: .topDirection, strength: abs(yMove) / maxVerticalMovement)
                 }
                 else {
-                    if self.actionDirection != .bottomDirection && yMove < -verticalTriggerPoint {
+                    if self.actionDirection != .bottomDirection && yMove < -controllerCentralTollerance {
                         self.actionDirection = .bottomDirection
                         self.vibrate()
                     }
-                    else if self.actionDirection == .bottomDirection && yMove > -verticalTriggerPoint {
+                    else if self.actionDirection == .bottomDirection && yMove > -controllerCentralTollerance {
                         self.actionDirection = .noDirection
                     }
-                    self.isPanningIn(direction: .bottomDirection)
+                    self.isPanningIn(direction: .bottomDirection, strength: abs(yMove) / maxVerticalMovement)
                 }
                 break
-                
+
             default:
                 break
             }
         }
         else if recognizer.state == UIGestureRecognizerState.ended {
+            print("end")
+            self.isPanningIn(direction: .noDirection, strength: 0.0)
             self.controllerDidEndMove()
         }
         
@@ -400,11 +411,20 @@ import UIKit
         self.delegate?.didPerformSwipeAction?(direction: .bottomDirection)
     }
     
-    private func isPanningIn(direction: MGPanController.Direction) {
-        self.delegate?.isPanningIn?(direction: direction)
+    
+    var currentDirection : MGPanController.Direction = .noDirection
+    var currentStrenght : CGFloat = 0.0
+    private func isPanningIn(direction: MGPanController.Direction, strength: CGFloat) {
+        currentDirection = direction
+        currentStrenght = strength
     }
     
-    
+    @objc func emit(timer: Timer){
+        if currentDirection != .noDirection {
+            print("emit \(currentDirection.rawValue)")
+            self.delegate?.isPanningIn?(direction: currentDirection, strenght: currentStrenght)
+        }
+    }
     
     @IBAction func firstTabBarPressed(_ sender: Any) {
         self.delegate?.didTapOnTabBarAt?(index: 0, sender: sender as? UIButton)

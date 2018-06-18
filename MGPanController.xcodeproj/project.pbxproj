@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		903A461120D6A48900845C1B /* confetti.png in Resources */ = {isa = PBXBuildFile; fileRef = 903A461020D6A36200845C1B /* confetti.png */; };
 		90E6CDBF20D14E010053A48E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E6CDBE20D14E010053A48E /* AppDelegate.swift */; };
 		90E6CDC120D14E010053A48E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E6CDC020D14E010053A48E /* ViewController.swift */; };
 		90E6CDC420D14E010053A48E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90E6CDC220D14E010053A48E /* Main.storyboard */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		903A461020D6A36200845C1B /* confetti.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = confetti.png; sourceTree = "<group>"; };
 		90E6CDBB20D14E010053A48E /* MGPanController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MGPanController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90E6CDBE20D14E010053A48E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		90E6CDC020D14E010053A48E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				90E6CDD720D15A6A0053A48E /* left_arrow_white.png */,
+				903A461020D6A36200845C1B /* confetti.png */,
 				90E6CDDB20D15A6A0053A48E /* right_arrow_white.png */,
 			);
 			name = Images;
@@ -152,6 +155,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				90E6CDC920D14E020053A48E /* LaunchScreen.storyboard in Resources */,
+				903A461120D6A48900845C1B /* confetti.png in Resources */,
 				90E6CDC620D14E020053A48E /* Assets.xcassets in Resources */,
 				90E6CDC420D14E010053A48E /* Main.storyboard in Resources */,
 				90E6CDE120D15A6A0053A48E /* left_arrow_white.png in Resources */,

@@ -19,22 +19,47 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bye-7O-JLw" customClass="MGPanController" customModule="MGPanController" customModuleProvider="target">
-                                <rect key="frame" x="37.5" y="193.5" width="300" height="300"/>
+                                <rect key="frame" x="8" y="459" width="359" height="200"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="300" id="jzo-GA-954"/>
-                                    <constraint firstAttribute="width" constant="300" id="uxe-Ii-CrT"/>
+                                    <constraint firstAttribute="height" constant="200" id="dOe-j7-Yj2"/>
+                                </constraints>
+                            </view>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Blx-gu-DG1">
+                                <rect key="frame" x="8" y="28" width="359" height="423"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vaP-fu-jUs">
+                                        <rect key="frame" x="171.5" y="203.5" width="16" height="16"/>
+                                        <color key="backgroundColor" red="0.96470588239999999" green="0.1215686275" blue="0.0039215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="16" id="8ma-0A-nMb"/>
+                                            <constraint firstAttribute="height" constant="16" id="aMW-mT-LOB"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="vaP-fu-jUs" firstAttribute="centerY" secondItem="Blx-gu-DG1" secondAttribute="centerY" id="hPA-o3-fea"/>
+                                    <constraint firstItem="vaP-fu-jUs" firstAttribute="centerX" secondItem="Blx-gu-DG1" secondAttribute="centerX" id="o7a-Fv-LT1"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="bye-7O-JLw" secondAttribute="trailing" constant="8" id="1pn-EZ-gSq"/>
+                            <constraint firstItem="Blx-gu-DG1" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="7rV-mS-u50"/>
                             <constraint firstItem="bye-7O-JLw" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="H6f-5B-nuM"/>
-                            <constraint firstItem="bye-7O-JLw" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="vGk-lc-BfN"/>
+                            <constraint firstItem="Blx-gu-DG1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="J32-EQ-t0K"/>
+                            <constraint firstItem="bye-7O-JLw" firstAttribute="top" secondItem="Blx-gu-DG1" secondAttribute="bottom" constant="8" id="JZ0-wy-GHU"/>
+                            <constraint firstItem="bye-7O-JLw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="Jqb-WU-3I6"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Blx-gu-DG1" secondAttribute="trailing" constant="8" id="Q1E-0i-bKx"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="bye-7O-JLw" secondAttribute="bottom" constant="8" id="cBv-wB-l6B"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="droneView" destination="vaP-fu-jUs" id="dOk-nr-QUe"/>
+                        <outlet property="fieldView" destination="Blx-gu-DG1" id="DfM-yb-jZ6"/>
                         <outlet property="panController" destination="bye-7O-JLw" id="cuz-TF-rgE"/>
                     </connections>
                 </viewController>
